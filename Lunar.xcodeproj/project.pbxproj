@@ -64,8 +64,6 @@
 		C73A4E6229C5EAFC006A22F3 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = C73A4E6129C5EAFC006A22F3 /* Localizable.stringsdict */; };
 		C73A4E6429C87149006A22F3 /* Trap.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E6329C87149006A22F3 /* Trap.swift */; };
 		C73AAC4B22241B690063AD2A /* Hotkeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73AAC4A22241B690063AD2A /* Hotkeys.swift */; };
-		C73B41EC263BE02E006F6783 /* LetsMove.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C73B41EA263BE01F006F6783 /* LetsMove.framework */; };
-		C73B41ED263BE02E006F6783 /* LetsMove.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C73B41EA263BE01F006F6783 /* LetsMove.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C73B41F6263E1301006F6783 /* ddcctl in Resources */ = {isa = PBXBuildFile; fileRef = C73B41F5263E1301006F6783 /* ddcctl */; };
 		C73B9A0D25FB9AD7003184FC /* Glob in Frameworks */ = {isa = PBXBuildFile; productRef = C73B9A0C25FB9AD7003184FC /* Glob */; };
 		C73CC6AE24616462003B2658 /* Sauce in Frameworks */ = {isa = PBXBuildFile; productRef = C73CC6AD24616462003B2658 /* Sauce */; };
@@ -232,7 +230,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				C743892C29474597004C5D9B /* WAYWindow.framework in Embed Frameworks */,
-				C73B41ED263BE02E006F6783 /* LetsMove.framework in Embed Frameworks */,
 				C7138D982634B03400406EE3 /* Paddle.framework in Embed Frameworks */,
 				C77C77532811A77B006326BE /* Sparkle.framework in Embed Frameworks */,
 			);
@@ -294,7 +291,6 @@
 		C73A4E6129C5EAFC006A22F3 /* Localizable.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		C73A4E6329C87149006A22F3 /* Trap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trap.swift; sourceTree = "<group>"; };
 		C73AAC4A22241B690063AD2A /* Hotkeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hotkeys.swift; sourceTree = "<group>"; };
-		C73B41EA263BE01F006F6783 /* LetsMove.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LetsMove.framework; sourceTree = "<group>"; };
 		C73B41F5263E1301006F6783 /* ddcctl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ddcctl; path = bin/ddcctl; sourceTree = SOURCE_ROOT; };
 		C73F56212BA38DF700343E5A /* BezelServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BezelServices.framework; path = ../../../../../System/Library/PrivateFrameworks/BezelServices.framework; sourceTree = "<group>"; };
 		C740A1F3262490E1004BC1C7 /* CLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLI.swift; sourceTree = "<group>"; };
@@ -459,7 +455,6 @@
 				C7C09CD5256AC70500B4BC5B /* SwiftyAttributes in Frameworks */,
 				C77C77522811A77B006326BE /* Sparkle.framework in Frameworks */,
 				C7F99AC727175E0C00FBF192 /* SwiftyMarkdown in Frameworks */,
-				C73B41EC263BE02E006F6783 /* LetsMove.framework in Frameworks */,
 				C77AB65C269A032E0046BA78 /* Magnet in Frameworks */,
 				C705A04D268BA02E001ABBA9 /* AXSwift in Frameworks */,
 				C7138D962634B02900406EE3 /* Paddle.framework in Frameworks */,
@@ -792,7 +787,6 @@
 				C714C99A2805BDEA0061588E /* SkyLight.framework */,
 				C7C5AD9926C5AD5400D68B7F /* MonitorPanel.framework */,
 				C7E896DC2652C37E0079A328 /* CoreBrightness.framework */,
-				C73B41EA263BE01F006F6783 /* LetsMove.framework */,
 				C7138D952634B02900406EE3 /* Paddle.framework */,
 				C74F8DBE25EB94660077DF27 /* DisplayServices.framework */,
 				C730421E2407E92C0016E591 /* Headers */,
@@ -1324,7 +1318,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6.10.4;
+				CURRENT_PROJECT_VERSION = 6.11.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "";
@@ -1355,8 +1349,8 @@
 					"$(PROJECT_DIR)/Lunar/CSSH",
 				);
 				LLVM_LTO = NO;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 6.10.4;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 6.11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CODE_SIGN_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = fyi.lunar.Lunar;
@@ -1390,7 +1384,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6.10.4;
+				CURRENT_PROJECT_VERSION = 6.11.0;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = "";
@@ -1421,8 +1415,8 @@
 					"$(PROJECT_DIR)/Lunar/CSSH",
 				);
 				LLVM_LTO = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 6.10.4;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 6.11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = fyi.lunar.Lunar;
@@ -1546,7 +1540,7 @@
 			repositoryURL = "https://github.com/getsentry/sentry-cocoa";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.2.0;
+				minimumVersion = 9.16.0;
 			};
 		};
 		C77AB65A269A032E0046BA78 /* XCRemoteSwiftPackageReference "Magnet" */ = {

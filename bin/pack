@@ -4,8 +4,8 @@ if not set -q PROJECT_DIR
     set PROJECT_DIR (dirname $DIR)
 end
 
-set CODESIGN_CERT "Developer ID Application: Alin Panaitiu (RDDXV84A73)"
-set CODESIGN_CERT_INSTALLER "Developer ID Installer: Alin Panaitiu (RDDXV84A73)"
+set CODESIGN_CERT "Developer ID Application: THE LOW-TECH GUYS SRL (RDDXV84A73)"
+set CODESIGN_CERT_INSTALLER "Developer ID Installer: THE LOW-TECH GUYS SRL (RDDXV84A73)"
 set WORK_DIR "$PROJECT_DIR"
 set SCRIPTS_DIR "$PROJECT_DIR/scripts"
 

@@ -13,7 +13,6 @@ import Combine
 import Compression
 import CoreLocation
 import Defaults
-import LetsMove
 import MacModelDB
 import Magnet
 import MediaKeyTap
@@ -68,6 +67,32 @@ func withTimeout<T>(_ timeout: DateComponents, name: String, _ block: @escaping 
     }
 
     return value
+}
+
+/// Bundle identifiers of the Shortcuts/automation runners. When one of these re-opens or
+/// activates Lunar (e.g. while a Shortcut runs a Lunar action in the background) we must not
+/// pop the Settings window in the user's face.
+let SHORTCUT_RUNNER_BUNDLE_IDS: Set<String> = [
+    "com.apple.WorkflowKit.BackgroundShortcutRunner",
+    "com.apple.WorkflowKit.ShortcutsRunner",
+    "com.apple.shortcuts",
+]
+
+/// The bundle identifier of the process that sent the AppleEvent currently being handled
+/// (reopen/open/activate), or nil if it can't be determined.
+func currentAppleEventSenderBundleID() -> String? {
+    guard let event = NSAppleEventManager.shared().currentAppleEvent,
+          let pidDescriptor = event.attributeDescriptor(forKeyword: keyAddressAttr)?
+          .coerce(toDescriptorType: typeKernelProcessID)
+    else { return nil }
+
+    let data = pidDescriptor.data
+    guard data.count == MemoryLayout<pid_t>.size else { return nil }
+
+    let pid = data.withUnsafeBytes { $0.load(as: pid_t.self) }
+    guard pid > 0 else { return nil }
+
+    return NSRunningApplication(processIdentifier: pid)?.bundleIdentifier
 }
 
 let fm = FileManager()
@@ -1025,7 +1050,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDeleg
         }
     }
 
+    /// True when the AppleEvent currently being handled (e.g. a reopen/activate) was sent by
+    /// one of the Shortcuts/automation runners. Those launch Lunar in the background to run an
+    /// action and should never surface the app window.
+    func reopenTriggeredByShortcutRunner() -> Bool {
+        guard let sender = currentAppleEventSenderBundleID() else { return false }
+        return SHORTCUT_RUNNER_BUNDLE_IDS.contains(sender)
+    }
+
     func applicationShouldHandleReopen(_: NSApplication, hasVisibleWindows _: Bool) -> Bool {
+        // Running a Shortcut that uses a Lunar action re-opens the app through
+        // com.apple.WorkflowKit.BackgroundShortcutRunner. Don't pop the window for that.
+        if reopenTriggeredByShortcutRunner() {
+            return true
+        }
+
         guard CachedDefaults[.hideMenuBarIcon] || didBecomeActiveAtLeastOnce else {
             return true
         }
@@ -1036,7 +1075,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDeleg
     }
 
     func applicationDidBecomeActive(_: Notification) {
-        if didBecomeActiveAtLeastOnce, CachedDefaults[.hideMenuBarIcon] {
+        if didBecomeActiveAtLeastOnce, CachedDefaults[.hideMenuBarIcon], !reopenTriggeredByShortcutRunner() {
             showWindow()
         }
         didBecomeActiveAtLeastOnce = true
@@ -1972,12 +2011,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, CLLocationManagerDeleg
     func onboard() {
         useOnboardingForDiagnostics = false
         createAndShowWindow("onboardWindowController", controller: &onboardWindowController)
-    }
-
-    func applicationWillFinishLaunching(_: Notification) {
-        #if !DEBUG && arch(arm64)
-            PFMoveToApplicationsFolderIfNecessary()
-        #endif
     }
 
     func checkEmergencyBlackoutOff(flags: NSEvent.ModifierFlags) {

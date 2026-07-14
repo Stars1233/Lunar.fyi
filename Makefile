@@ -134,3 +134,7 @@ ifneq (, $(BETA))
 else
 	pandoc -f gfm -o $@ --standalone --metadata title="Lunar $(FULL_VERSION) - Release Notes" --css https://files.lunar.fyi/ReleaseNotes/release.css ReleaseNotes/$(VERSION).md
 endif
+
+.PHONY: hooks
+hooks:
+	@ln -sf "$(CURDIR)/.pre-commit.sh" .git/hooks/pre-commit && echo "pre-commit hook installed -> .pre-commit.sh"
